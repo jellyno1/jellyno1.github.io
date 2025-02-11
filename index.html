@@ -1,29 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head><meta name="robots" content="noindex, nofollow">
   <meta charset="UTF-8">
-  <title>小姜和小陈的二人世界</title>
+  <title>我们的回忆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 可根据需要更换成自己喜欢的图标 -->
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/daofeng2015/extra-images/love_icon.png">
+
   <style>
+    /* 全局样式 */
     body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      background: #ffeaf1; /* 粉色背景 */
+      color: #333;
+    }
+
+    header {
       text-align: center;
-      font-family: sans-serif;
-      background: #fff0f5;
-      color: #c71585;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #ffafc1, #ffc8d6);
+      color: #fff;
     }
-    h1 {
-      margin-top: 50px;
-      font-size: 3em;
+    header h1 {
+      font-size: 2rem;
+      margin: 0.5rem 0;
     }
-    .heart {
-      font-size: 5em;
-      color: red;
+    header p {
+      font-size: 1.2rem;
+      margin: 0;
     }
-  </style>
-</head>
-<body>
-  <h1>亲爱的老婆，情人节快乐！</h1>
-  <p class="heart">❤️</p>
-  <p>虽然我在德国，但我的心永远跟你在一起！</p>
-  <!-- 这里可以插入一些你想说的话或者照片链接 -->
-</body>
-</html>
+
+    /* 导航区（可选，如果你想多页面的话） */
+    nav {
+      text-align: center;
+      background-color: #ffd4df;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: #333;
+      margin: 0 0.8rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #e60076;
+    }
+
+    /* 时间线容器 */
+    .timeline {
+      width: 90%;
+      max-width: 800px;
+      margin: 2rem auto;
+      position: relative;
+      padding: 1rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #f48da9; /* 中间线条颜色 */
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      width: 50%;
+      padding: 1rem;
+      position: relative;
+      margin-bottom: 2rem;
+      box-sizing: border-box;
+    }
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      background: #f48da9;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #ffd4df;
+    }
+    .timeline-item:nth-child(odd)::before {
+      right: -8px;
+    }
+    .timeline-item:nth-child(even)::before {
+      left: -8px;
+    }
+    .timeline-content {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: inline-block;
+      max-width: 90%;
+    }
+    .timeline-content h3 {
+      margin-top: 0;
+      color: #e60076;
+    }
+
+    /* 照片廊（示例） */
+    .gallery {
+      width: 90%;
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .gallery h2 {
+      margin-bottom: 1rem;
+      color: #e60076;
+    }
+    .photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .photos img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition
