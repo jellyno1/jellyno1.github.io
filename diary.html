@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>日记内容</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e7f0fc;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #6ba8e5;
+      padding: 1.5rem;
+      text-align: center;
+      color: #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .content {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .content p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: #d0e6f9;
+      color: #555;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #337ab7;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title">加载中...</h1>
+  </header>
+
+  <div class="content" id="content">
+    <p>请稍候，正在加载日记内容...</p>
+    <a href="index.html" class="back-link">← 回到主页</a>
+  </div>
+
+  <footer>
+    <p>© 2025 我的日记本</p>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const date = params.get('date');
+
+    fetch('diary.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data[date]) {
+          document.getElementById('title').innerText = data[date].title;
+          const rawText = data[date].content;
+          const paragraphs = rawText.split("\n\n");
+          document.getElementById('content').innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('') + '<a href="index.html" class="back-link">← 回到主页</a>';
+        } else {
+          document.getElementById('title').innerText = '未找到日记';
+          document.getElementById('content').innerHTML = '<p>请检查日期是否正确，或稍后再试。</p>';
+        }
+      })
+      .catch(() => {
+        document.getElementById('title').innerText = '错误';
+        document.getElementById('content').innerHTML = '<p>无法加载日记数据，请检查网络或文件格式。</p>';
+      });
+  </script>
+</body>
+</html>

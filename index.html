@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>我的日记本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e7f0fc;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #6ba8e5;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: #fff;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .diary-list {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .diary-entry {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+    .diary-entry:hover {
+      background: #dbeeff;
+    }
+    .diary-entry a {
+      text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #d0e6f9;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>我的个人日记</h1>
+    <p>每天一点记录，写给未来的自己</p>
+  </header>
+
+  <main class="diary-list" id="diary-list"></main>
+
+  <footer>
+    <p>© 2025 我的日记本</p>
+  </footer>
+
+  <script>
+    fetch('diary.json')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('diary-list');
+        const dates = Object.keys(data).sort().reverse();
+        dates.forEach(date => {
+          const entry = document.createElement('div');
+          entry.className = 'diary-entry';
+          entry.innerHTML = `<a href="diary.html?date=${date}">📝 ${data[date].title}</a>`;
+          list.appendChild(entry);
+        });
+      });
+  </script>
+</body>
+</html>
